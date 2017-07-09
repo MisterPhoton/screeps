@@ -31,8 +31,8 @@ roles.sourcer.settings = {
   },
   maxLayoutAmount: {
     1: 4,
-    5: 1,
-  },
+    5: 1
+  }
 };
 
 roles.sourcer.buildRoad = true;

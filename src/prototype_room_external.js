@@ -292,7 +292,7 @@ Room.prototype.handleReservedRoom = function() {
   }
 
   let reservers = this.find(FIND_MY_CREEPS, {
-    filter: (c) => c.memory.role === 'reserver',
+    filter: (c) => c.memory.role === 'reserver'
   });
   if (reservers.length === 0) {
     this.checkAndSpawnReserver();
@@ -352,7 +352,7 @@ Room.prototype.handleUnreservedRoom = function() {
         let numRooms = config.room.reservedRCL;
         if (reservedRooms.length < numRooms[room.controller.level]) {
           this.memory.reservation = {
-            base: room.name,
+            base: room.name
           };
           this.memory.state = 'Reserved';
           break;

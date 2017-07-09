@@ -19,7 +19,7 @@ roles.carry.settings = {
   param: ['controller.level'],
   prefixString: {
     1: 'MC',
-    3: 'WMC',
+    3: 'WMC'
   },
   layoutString: 'MC',
   amount: {
@@ -62,7 +62,7 @@ roles.carry.handleMisplacedSpawn = function(creep) {
         }
       });
       creep.moveTo(structure, {
-        ignoreCreeps: true,
+        ignoreCreeps: true
       });
       creep.transfer(structure, RESOURCE_ENERGY);
     } else {
