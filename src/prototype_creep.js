@@ -186,6 +186,11 @@ Creep.prototype.buildRoad = function() {
     return false;
   }
 
+  // TODO should be extracted to a method, stolen from role_harvester
+  if (!this.room.storage || (this.room.storage.store.energy + this.carry.energy) < config.creep.energyFromStorageThreshold) {
+    return false;
+  }
+
   // TODO as creep variable
   if (this.memory.role != 'carry' && this.memory.role != 'harvester') {
     this.getEnergyFromStructure();
