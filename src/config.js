@@ -126,7 +126,7 @@ global.config = {
 
   sourcer: {
     spawnCarryLevelMultiplier: 300,
-    spawnCarryWaitTime: 400
+    spawnCarryWaitTime: 300
   },
 
   carry: {
