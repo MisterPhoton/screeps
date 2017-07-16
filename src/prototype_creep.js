@@ -181,15 +181,17 @@ Creep.prototype.stayInRoom = function() {
 };
 
 Creep.prototype.buildRoad = function() {
-  if (this.room.controller && this.room.controller.my && this.pos.lookFor(LOOK_TERRAIN)[0] !== 'swamp' &&
-    (this.room.controller.level < 3 || this.room.memory.misplacedSpawn)) {
-    // TODO make dependent on the swamp to non-swamp relation? High swamp rooms could use the roads better ...
-    return false;
-  }
+  if (this.room.controller && this.room.controller.my) {
 
-  // TODO should be extracted to a method, stolen from role_harvester
-  if (!this.room.storage || (this.room.storage.store.energy + this.carry.energy) < config.creep.energyFromStorageThreshold) {
-    return false;
+    if (this.pos.lookFor(LOOK_TERRAIN)[0] !== 'swamp' &&
+      (this.room.controller.level < 3 || this.room.memory.misplacedSpawn)) {
+      // TODO make dependent on the swamp to non-swamp relation? High swamp rooms could use the roads better ...
+      return false;
+    }
+    // TODO should be extracted to a method, stolen from role_harvester
+    if (!this.room.storage || (this.room.storage.store.energy + this.carry.energy) < config.creep.energyFromStorageThreshold) {
+      return false;
+    }
   }
 
   // TODO as creep variable
