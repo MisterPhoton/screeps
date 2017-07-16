@@ -201,16 +201,17 @@ global.config = {
       harvester: 1,
       sourcer: 2,
       storagefiller: 3,
-      defendranged: 4
+      defendranged: 4,
+      carry: 5
     },
     otherRoom: {
       harvester: 11,
       defender: 12,
       defendranged: 13,
       nextroomer: 15,
-      reserver: 16,
       carry: 17,
-      sourcer: 18
+      sourcer: 18,
+      reserver: 19
     }
   }
 };

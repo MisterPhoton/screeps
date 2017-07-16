@@ -320,6 +320,10 @@ Room.prototype.executeRoom = function() {
       if (this.controller.level === 2 || this.controller.level === 3) {
         amount = 5;
       }
+    } else {
+      if (this.storage.store.energy < config.creep.energyFromStorageThreshold) {
+        amount = 3;
+      }
     }
     this.checkRoleToSpawn('harvester', amount, 'harvester');
   }
