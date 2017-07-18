@@ -26,8 +26,7 @@ roles.sourcer.settings = {
   amount: {
     0: [1],
     650: [1, 4],
-    700: [2, 4],
-    750: [3, 4]
+    700: [2, 4]
   },
   maxLayoutAmount: {
     0: 4,
@@ -72,7 +71,7 @@ roles.sourcer.preMove = function(creep, directions) {
 
   // TODO Check if this is working
   if (directions) {
-    let pos = creep.pos.buildRoomPosition(directions.direction);
+    let pos = creep.pos.getAdjacentPosition(directions.direction);
     creep.moveCreep(pos, (directions.direction + 3) % 8 + 1);
   }
 

@@ -127,7 +127,7 @@ Room.prototype.checkRoleToSpawn = function(role, amount, targetId, targetRoom, l
   if (this.inQueue(creepMemory) || this.inRoom(creepMemory, amount)) { return false; }
 
   if (config.debug.queue) {
-    this.log('Add ' + creepMemory.role + ' to queue.');
+    this.log('Add ' + creepMemory.role + ' to queue. ' + JSON.stringify(creepMemory));
   }
   return this.memory.queue.push(creepMemory);
 };
@@ -305,11 +305,7 @@ Room.prototype.getPartConfig = function(creep) {
 };
 
 Room.prototype.getSpawnableSpawns = function() {
-  let spawnsNotSpawning = this.find(FIND_MY_SPAWNS, {
-    filter: function(object) {
-      return !object.spawning;
-    }
-  });
+  let spawnsNotSpawning = this.find(FIND_MY_SPAWNS, { filter: spawn => !spawn.spawning });
   return spawnsNotSpawning;
 };
 
@@ -376,24 +372,9 @@ Room.prototype.checkAndSpawnSourcer = function() {
   var sources = this.find(FIND_SOURCES);
 
   let source;
-
-  let isSourcer = function(object) {
-    if (object.memory.role !== 'sourcer') {
-      return false;
-    }
-    if (object.memory.routing.targetId !== source.id) {
-      return false;
-    }
-    if (object.memory.routing.targetRoom !== source.pos.roomName) {
-      return false;
-    }
-    return true;
-  };
-
+  let isSourcer = object => object.memory.routing.targetId === source.id && object.memory.routing.targetRoom === source.pos.roomName;
   for (source of sources) {
-    let sourcers = this.find(FIND_MY_CREEPS, {
-      filter: isSourcer
-    });
+    let sourcers = this.findPropertyFilter(FIND_MY_CREEPS, 'memory.role', ['sourcer'], false, { filter: isSourcer });
     if (sourcers.length === 0) {
       //      this.log(source.id);
       this.checkRoleToSpawn('sourcer', 1, source.id, this.name);

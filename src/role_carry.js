@@ -18,17 +18,10 @@ roles.carry.boostActions = ['capacity'];
 roles.carry.settings = {
   param: ['energyCapacityAvailable'],
   prefixString: {
-    800: 'WMC'
+    800: 'W'
   },
   layoutString: 'MC',
-  amount: {
-    300: [3, 3], // RCL 1
-    550: [5, 5], // RCL 2
-    800: [6, 6], // RCL 3
-    1300: [10, 10], // RCL 4
-    1800: [15, 15], // RCL 5
-    2300: [20, 20], // RCL 6
-  },
+  amount: config.carry.sizes,
   maxLayoutAmount: {
     0: 1
   }
@@ -60,12 +53,7 @@ roles.carry.handleMisplacedSpawn = function(creep) {
     //     creep.say('cmis', true);
     if (creep.carry.energy > 0) {
       let structure = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
-        filter: function(object) {
-          if (object.energy === object.energyCapacity) {
-            return false;
-          }
-          return true;
-        }
+        filter: object => object.energy < object.energyCapacity
       });
       creep.moveTo(structure, {
         ignoreCreeps: true
