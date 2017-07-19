@@ -25,6 +25,13 @@ If the application is accepted a response is send back
   - `type` the type of the Quest
   - `end` the end time where the request needs to be solved
 
+If the quest is won a terminal transfer is send
+
+  {"type": "Quest", "id": 0.3451, "reputation": "100", "result": "won"}
+
+ - `reputation` the current reputation of the player
+
+
 Quests can be:
  - `buildcs` Build all construction sites in the given room
  - **tbd** Write your (or my) name with roads (or walls) in a specific room

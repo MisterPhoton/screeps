@@ -22,8 +22,8 @@ brain.getQuestBuildcs = function(data) {
   let quest = {};
   quest.room = data.room;
   quest.quest = 'buildcs';
-  quest.end = Game.time + 100;
-  quest.check = Game.time + 10;
+  quest.end = Game.time + 1500;
+  quest.check = Game.time + 0;
   return quest;
 };
 
