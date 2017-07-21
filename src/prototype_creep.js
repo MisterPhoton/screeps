@@ -14,7 +14,8 @@ Creep.prototype.mySignController = function() {
           id: Math.random(),
           origin: this.memory.base,
           type: 'Quest',
-          info: 'http://tooangel.github.io/screeps/doc/Quests.html'
+          //info: 'http://tooangel.github.io/screeps/doc/Quests.html'
+          info: 'https://goo.gl/QEyNzG' // Pointing to the workspace branch doc
         };
         this.log('Attach quest');
         text = JSON.stringify(quest);

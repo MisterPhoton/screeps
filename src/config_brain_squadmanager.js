@@ -28,6 +28,19 @@ brain.handleIncomingTransactions = function() {
   }
 };
 
+brain.initPlayer = function(name) {
+  if (!Memory.players[name]) {
+    Memory.players[name] = {
+      name: name,
+      rooms: {},
+      level: 0,
+      counter: 0,
+      idiot: 0,
+      reputation: 0
+    };
+  }
+};
+
 brain.increaseIdiot = function(name, value) {
   if (name === 'Invader') {
     return false;
@@ -36,15 +49,7 @@ brain.increaseIdiot = function(name, value) {
   value = value || 1;
   Memory.players = Memory.players || {};
 
-  if (!Memory.players[name]) {
-    Memory.players[name] = {
-      name: name,
-      rooms: {},
-      level: 0,
-      counter: 0,
-      idiot: 0
-    };
-  }
+  brain.initPlayer();
 
   if (!Memory.players[name].idiot) {
     Memory.players[name].idiot = 0;

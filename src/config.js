@@ -28,8 +28,8 @@ global.config = {
   },
 
   quests: {
-    enabled: false,
-    signControllerPercentage: 0.1
+    enabled: true,
+    signControllerPercentage: 0.5
   },
 
   info: {
@@ -190,6 +190,11 @@ global.config = {
     creepAvoid: 0xFF,
     wallThickness: 1,
     version: 18
+  },
+
+  terminal: {
+    energyAmount: 100000,
+    storageMinEnergyAmount: 20000
   },
 
   mineral: {
