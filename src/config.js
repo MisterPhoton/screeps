@@ -127,17 +127,16 @@ global.config = {
   carry: {
     sizes: {
       0: [3, 3], // RCL 1
-      550: [5, 5], // RCL 2
+      550: [4, 4], // RCL 2
       800: [6, 6], // RCL 3
-      1300: [10, 10], // RCL 4
-      1800: [14, 14], // RCL 5
-      2300: [20, 20], // RCL 6
+      1300: [6, 11], // RCL 4
+      1800: [8, 15], // RCL 5
+      2300: [11, 21], // RCL 6
     },
     // Percentage should increase from base to target room. Decrease may cause stack on border
     carryPercentageBase: 0.1,
     carryPercentageHighway: 0.2,
-    carryPercentageExtern: 0.5,
-    maxPerTargetPerRoom: 2
+    carryPercentageExtern: 0.5
   },
 
   creep: {

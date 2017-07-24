@@ -16,20 +16,20 @@ roles.sourcer = {};
 roles.sourcer.settings = {
   param: ['energyCapacityAvailable'],
   prefixString: {
-    150: 'MW',
+    300: 'MW',
     600: 'MWC'
   },
   layoutString: {
-    0: 'W',
+    300: 'W',
     650: 'MW'
   },
   amount: {
-    0: [1],
+    300: [1],
     650: [1, 4],
     700: [2, 4]
   },
   maxLayoutAmount: {
-    0: 4,
+    300: 4,
     650: 1
   }
 };

@@ -37,8 +37,14 @@ Creep.prototype.handleSourcer = function() {
       }
     }
 
-    let link = Game.getObjectById(this.memory.link);
-    this.transfer(link, RESOURCE_ENERGY);
+    const link = Game.getObjectById(this.memory.link);
+    if (link) {
+      this.transfer(link, RESOURCE_ENERGY);
+      const resources = this.pos.findInRangePropertyFilter(FIND_DROPPED_RESOURCES, 1, 'resourceType', [RESOURCE_ENERGY]);
+      if (resources.length > 0) {
+        this.pickup(resources);
+      }
+    }
   }
 };
 
@@ -48,23 +54,13 @@ Creep.prototype.spawnCarry = function() {
     return false;
   }
 
-  var foundKey;
-  for (let key of Object.keys(config.carry.sizes).sort(function(a, b) { return parseInt(a, 10) - parseInt(b, 10); })) {
-    if (Game.rooms[this.memory.base].energyCapacityAvailable < key) {
-      break;
-    }
-    foundKey = key;
-  }
-  let carryCapacity = config.carry.sizes[foundKey][0] * CARRY_CAPACITY;
+  const foundKey = Object.keys(config.carry.sizes).reverse()
+    .find(key => (key <= Game.rooms[this.memory.base].energyCapacityAvailable));
+  let carryCapacity = config.carry.sizes[foundKey][1] * CARRY_CAPACITY;
 
-  var work_parts = 0;
-  for (var part_i in this.body) {
-    if (this.body[part_i].type === 'work') {
-      work_parts++;
-    }
-  }
+  const workParts = this.body.filter(part => part.type === WORK).length;
 
-  let waitTime = carryCapacity / (HARVEST_POWER * work_parts);
+  let waitTime = carryCapacity / (HARVEST_POWER * workParts);
 
   var spawn = {
     role: 'carry',
@@ -74,33 +70,20 @@ Creep.prototype.spawnCarry = function() {
     }
   };
 
-  let energyAtPosition = 0;
-  var energies = this.pos.lookFor(LOOK_RESOURCES);
-  for (let energy of energies) {
-    energyAtPosition += energy.amount;
+  let resourceAtPosition = 0;
+  var resources = this.pos.lookFor(LOOK_RESOURCES);
+  for (let resource of resources) {
+    resourceAtPosition += resource.amount;
   }
 
-  if (energyAtPosition > carryCapacity) {
-    Game.rooms[this.memory.base].checkRoleToSpawn('carry', config.carry.maxPerTargetPerRoom, this.memory.routing.targetId, this.memory.routing.targetRoom);
-    this.memory.wait = waitTime;
-    return true;
-  }
-
-  let containers = this.pos.findInRange(FIND_STRUCTURES, 0, {
-    filter: function(object) {
-      if (object.structureType != STRUCTURE_CONTAINER) {
-        return false;
-      }
-      return true;
-    }
-  });
+  let containers = this.pos.findInRangeStructures(FIND_STRUCTURES, 0, STRUCTURE_CONTAINER);
 
   for (let container of containers) {
-    energyAtPosition += _.sum(container.store);
+    resourceAtPosition += _.sum(container.store);
   }
 
-  if (energyAtPosition > carryCapacity) {
-    Game.rooms[this.memory.base].checkRoleToSpawn('carry', config.carry.maxPerTargetPerRoom, this.memory.routing.targetId, this.memory.routing.targetRoom);
+  if (resourceAtPosition > carryCapacity) {
+    Game.rooms[this.memory.base].checkRoleToSpawn('carry', 0, this.memory.routing.targetId, this.memory.routing.targetRoom);
   }
   this.memory.wait = waitTime;
 };

@@ -309,6 +309,7 @@ Room.prototype.executeRoom = function() {
         amount = 3;
       }
     }
+
     this.checkRoleToSpawn('harvester', amount, 'harvester');
   }
 
@@ -352,9 +353,10 @@ Room.prototype.executeRoom = function() {
         role = 'defendmelee';
       }
       if (this.exectueEveryTicks(250)) {
-        this.checkRoleToSpawn(role, 1, undefined, this.room.name, 1, this.room.name);
+        this.checkRoleToSpawn(role, 1, undefined, this.name, 1, this.name);
       }
     }
+
     if (this.exectueEveryTicks(10)) {
       this.log('Under attack from ' + hostiles[0].owner.username);
     }

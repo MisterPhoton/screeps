@@ -36,7 +36,7 @@ queue is used.
     A carry transports energy from the target to the storage in the base (From sources, energy piles or storages in other rooms)
     They use fixed precalculated paths
     While moving they try to transfer energy to the next creep or if in base to other structures (tower, link, extension)
-    So carries move forward if the have 'no' energy, backwards if the 'have' energy
+    So carries move forward if they have 'no' energy, backwards if the 'have' energy
     'no' or 'have' is defined differently for different rooms
 
     The idea behind that is:

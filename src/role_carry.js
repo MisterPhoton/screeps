@@ -18,13 +18,12 @@ roles.carry.boostActions = ['capacity'];
 roles.carry.settings = {
   param: ['energyCapacityAvailable'],
   prefixString: {
-    800: 'W'
+    300: '',
+    550: 'W'
   },
   layoutString: 'MC',
   amount: config.carry.sizes,
-  maxLayoutAmount: {
-    0: 1
-  }
+  maxLayoutAmount: 1
 };
 
 roles.carry.checkHelperEmptyStorage = function(creep) {
